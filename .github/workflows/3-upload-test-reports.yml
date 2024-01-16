@@ -33,9 +33,15 @@ jobs:
     outputs:
       current_step: ${{ steps.get_step.outputs.current_step }}
 
-  on_add_test_reporting:
-    name: On add test reporting
-    needs: get_current_step
+  - name: Run Tests
+    run: npm test
+
+- name: Upload Test Reports
+  uses: actions/upload-artifact@v2
+  with:
+    name: test-reports
+    path: path/to/test/reports
+
 
     # We will only run this action when:
     # 1. This repository isn't the template repository.
